@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grok Voyages | Amigos en CDMX — A Culinary Odyssey</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --terracotta: #2C3E50;
+  --terracotta-deep: #1A252F;
+  --gold: #C4A574;
+  --gold-soft: #E8D9C4;
+  --cream: #F7F5F2;
+  --dark: #0F1419;
+  --charcoal: #1C1C1C;
+  --soft: #EDE9E4;
+  --text: #1C1C1C;
+  --white: #FFFFFF;
+  --accent: #5C6B73;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--text); line-height: 1.7; overflow-x: hidden; }
+h1, h2, h3, h4 { font-family: 'Playfair Display', serif; color: var(--dark); font-weight: 600; }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+nav { position: fixed; top: 0; width: 100%; background: rgba(15,20,25,0.88); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); z-index: 1000; padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; transition: all 0.4s ease; border-bottom: 1px solid rgba(196,165,116,0.15); }
+nav.scrolled { background: rgba(15,20,25,0.96); padding: 0.8rem 5%; }
+nav .logo { color: var(--gold); font-family: 'Playfair Display', serif; font-size: 1.6rem; letter-spacing: 0.5px; }
+nav .nav-links { display: flex; gap: 2rem; }
+nav a { color: var(--cream); text-decoration: none; font-size: 0.95rem; font-weight: 400; position: relative; transition: color 0.3s; }
+nav a::after { content: ''; position: absolute; width: 0; height: 1px; bottom: -4px; left: 0; background: var(--gold); transition: width 0.3s; }
+nav a:hover { color: var(--gold); }
+nav a:hover::after { width: 100%; }
+.mobile-toggle { display: none; background: none; border: none; color: var(--gold); font-size: 1.5rem; cursor: pointer; }
+.hero { height: 100vh; min-height: 700px; background: linear-gradient(135deg, rgba(15,20,25,0.45) 0%, rgba(15,20,25,0.65) 100%), url('images/hero.jpg') center/cover no-repeat; display: flex; align-items: center; justify-content: center; text-align: center; color: white; position: relative; }
+.hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at center, transparent 0%, rgba(15,20,25,0.3) 100%); }
+.hero-content { max-width: 920px; padding: 2rem; position: relative; z-index: 2; }
+.hero .eyebrow { letter-spacing: 4px; font-size: 0.85rem; color: var(--gold); text-transform: uppercase; margin-bottom: 1.5rem; opacity: 0; animation: fadeUp 1s ease forwards 0.3s; }
+.hero h1 { font-size: clamp(3.2rem, 7vw, 5.5rem); color: white; margin-bottom: 1.2rem; text-shadow: 0 4px 20px rgba(0,0,0,0.4); line-height: 1.1; opacity: 0; animation: fadeUp 1s ease forwards 0.5s; }
+.hero p { font-size: 1.35rem; margin-bottom: 2.5rem; opacity: 0; font-weight: 300; max-width: 700px; margin-left: auto; margin-right: auto; animation: fadeUp 1s ease forwards 0.7s; }
+.btn { display: inline-block; background: var(--terracotta); color: white; padding: 1.1rem 2.8rem; text-decoration: none; border-radius: 2px; font-weight: 500; letter-spacing: 0.5px; transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); position: relative; overflow: hidden; opacity: 0; animation: fadeUp 1s ease forwards 0.9s; }
+.btn:hover { background: var(--terracotta-deep); transform: translateY(-3px); box-shadow: 0 12px 30px rgba(44,62,80,0.35); }
+.btn::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); transition: left 0.6s; }
+.btn:hover::before { left: 100%; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+.sticky-cta { position: fixed; bottom: 2rem; right: 2rem; z-index: 999; background: var(--terracotta); color: white; padding: 1rem 1.8rem; border-radius: 50px; text-decoration: none; font-weight: 500; box-shadow: 0 8px 25px rgba(44,62,80,0.4); transition: all 0.3s ease; display: flex; align-items: center; gap: 0.6rem; }
+.sticky-cta:hover { background: var(--terracotta-deep); transform: translateY(-3px); box-shadow: 0 12px 30px rgba(44,62,80,0.5); }
+section { padding: 7rem 6%; max-width: 1400px; margin: 0 auto; }
+.section-title { font-size: clamp(2.4rem, 4vw, 3.4rem); text-align: center; margin-bottom: 1rem; }
+.section-sub { text-align: center; color: #666; margin-bottom: 4rem; font-style: italic; max-width: 700px; margin-left: auto; margin-right: auto; font-size: 1.1rem; }
+.reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.image-break { height: 480px; margin: 0; max-width: none; padding: 0; background-size: cover; background-position: center; background-repeat: no-repeat; position: relative; }
+.image-break::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(15,20,25,0.15), rgba(15,20,25,0.35)); }
+.image-break-caption { position: absolute; bottom: 2.5rem; left: 8%; color: white; z-index: 2; font-family: 'Playfair Display', serif; font-size: 1.6rem; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem; }
+.card { background: var(--white); border-radius: 16px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.06); transition: all 0.4s ease; }
+.card:hover { transform: translateY(-12px); box-shadow: 0 25px 50px rgba(0,0,0,0.12); }
+.card img { width: 100%; height: 240px; object-fit: cover; transition: transform 0.6s ease; }
+.card:hover img { transform: scale(1.08); }
+.card-content { padding: 2rem; }
+.card h3 { margin-bottom: 0.8rem; font-size: 1.5rem; }
+.day-card { background: var(--white); border-radius: 16px; padding: 2.8rem; margin-bottom: 2rem; box-shadow: 0 8px 30px rgba(0,0,0,0.05); border-left: 5px solid var(--terracotta); position: relative; transition: all 0.3s ease; }
+.day-card:hover { box-shadow: 0 15px 40px rgba(0,0,0,0.1); }
+.day-card h3 { color: var(--terracotta); font-size: 1.9rem; margin-bottom: 0.6rem; display: flex; align-items: center; gap: 0.6rem; }
+.day-meta { color: var(--gold); font-weight: 500; margin-bottom: 1.2rem; letter-spacing: 0.5px; font-size: 0.95rem; }
+.day-number { position: absolute; top: 1.5rem; right: 2rem; font-family: 'Playfair Display', serif; font-size: 3.5rem; color: rgba(44,62,80,0.12); font-weight: 700; line-height: 1; }
+.tip-box { background: var(--soft); padding: 2.2rem; border-radius: 14px; margin: 2.5rem 0; border-left: 5px solid var(--gold); }
+.allergy-box { background: #FFF8E1; border-left: 5px solid #F9A825; padding: 1.8rem; border-radius: 12px; margin: 1.8rem 0; }
+.deals-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.8rem; }
+.deal { background: var(--white); padding: 2rem; border-radius: 14px; border: 1px solid #E8E0D8; transition: all 0.3s ease; }
+.deal:hover { border-color: var(--terracotta); transform: translateY(-6px); box-shadow: 0 12px 30px rgba(0,0,0,0.08); }
+.deal strong { color: var(--terracotta); display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.6rem; font-size: 1.15rem; }
+.stay-hero { height: 420px; border-radius: 16px; overflow: hidden; margin-bottom: 3rem; background: url('images/rooftop.jpg') center/cover no-repeat; position: relative; }
+.stay-hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(15,20,25,0.5), transparent 60%); }
+.culinary-highlight { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; margin: 3rem 0; }
+.culinary-highlight img { width: 100%; height: 380px; object-fit: cover; border-radius: 16px; }
+.testimonial { background: var(--white); padding: 3rem; border-radius: 16px; text-align: center; box-shadow: 0 10px 40px rgba(0,0,0,0.06); max-width: 800px; margin: 3rem auto; border-top: 4px solid var(--gold); }
+.testimonial p { font-size: 1.2rem; font-style: italic; margin-bottom: 1.2rem; color: var(--charcoal); }
+.testimonial .author { font-weight: 500; color: var(--terracotta); }
+.inquiry-form { background: var(--white); padding: 3rem; border-radius: 16px; max-width: 640px; margin: 0 auto; box-shadow: 0 15px 40px rgba(0,0,0,0.08); }
+.form-group { margin-bottom: 1.4rem; }
+.form-group label { display: block; margin-bottom: 0.4rem; font-weight: 500; font-size: 0.95rem; }
+.form-group input, .form-group select, .form-group textarea { width: 100%; padding: 0.9rem 1rem; border: 1px solid #E0E0E0; border-radius: 6px; font-family: inherit; font-size: 1rem; transition: border-color 0.3s; }
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--terracotta); }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.form-submit { width: 100%; background: var(--terracotta); color: white; border: none; padding: 1.1rem; font-size: 1.05rem; font-weight: 500; border-radius: 6px; cursor: pointer; transition: all 0.3s ease; }
+.form-submit:hover { background: var(--terracotta-deep); }
+footer { background: var(--dark); color: var(--cream); text-align: center; padding: 4rem 2rem; margin-top: 4rem; }
+footer .logo { color: var(--gold); font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 1rem; }
+@media (max-width: 900px) { .culinary-highlight { grid-template-columns: 1fr; } nav .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; background: rgba(15,20,25,0.98); flex-direction: column; padding: 1.5rem; gap: 1rem; } nav .nav-links.active { display: flex; } .mobile-toggle { display: block; } section { padding: 5rem 1.5rem; } .day-number { font-size: 2.5rem; top: 1rem; right: 1rem; } .image-break { height: 360px; } .sticky-cta { bottom: 1rem; right: 1rem; padding: 0.9rem 1.4rem; } .form-row { grid-template-columns: 1fr; } }
+@media (max-width: 768px) { .hero h1 { font-size: 2.8rem; } .grid { grid-template-columns: 1fr; } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; } .reveal { opacity: 1; transform: none; } }
+</style>
+</head>
+<body>
+<nav id="nav">
+  <div class="logo">Grok Voyages</div>
+  <button class="mobile-toggle" aria-label="Menu">☰</button>
+  <div class="nav-links">
+    <a href="#overview">Overview</a>
+    <a href="#itinerary">Itinerary</a>
+    <a href="#stay">Stay</a>
+    <a href="#culinary">Culinary</a>
+    <a href="#tips">Tips & Safety</a>
+    <a href="#deals">Deals</a>
+    <a href="#inquiry">Customize</a>
+  </div>
+</nav>
+<a href="#inquiry" class="sticky-cta"><span>✦ Customize This Trip</span></a>
+<section class="hero">
+  <div class="hero-content">
+    <p class="eyebrow">A Private Journey for Friends</p>
+    <h1>Amigos en CDMX</h1>
+    <p>A 4–5 Day Culinary Odyssey Through Mexico City<br>Luxury Comfort • Food-First • Safe & Seamless • Peanut-Aware</p>
+    <a href="#itinerary" class="btn">Explore the Journey</a>
+  </div>
+</section>
+<section id="overview">
+  <h2 class="section-title reveal">Your Curated Escape</h2>
+  <p class="section-sub reveal">Designed exclusively for a small group of friends who live for flavor, neighborhoods, and thoughtful luxury — without the crowds or the risk.</p>
+  <div class="grid">
+    <div class="card reveal"><img src="images/tacos.jpg" alt="Al pastor tacos with pineapple" loading="lazy"><div class="card-content"><h3>Food as the North Star</h3><p>Private market immersions, chef-led taco crawls, mezcal education, and carefully chosen tables — all peanut-safe by design.</p></div></div>
+    <div class="card reveal"><img src="images/roma.jpg" alt="Roma Norte streets" loading="lazy"><div class="card-content"><h3>Base in the Best</h3><p>Boutique stays in leafy, walkable Roma Norte or Condesa. Uber-only transport. Zero shady situations.</p></div></div>
+    <div class="card reveal"><img src="images/architecture.jpg" alt="Architecture" loading="lazy"><div class="card-content"><h3>Focused Highlights</h3><p>Centro’s grandeur, Teotihuacan or Xochimilco day trip, shopping, and golden evenings — all within your ~$4,000 CAD per couple all-in (ground + realistic flights).</p></div></div>
+  </div>
+  <div class="tip-box reveal"><strong>Budget Philosophy:</strong> $4,000 CAD per couple (two couples / four people total). This covers 4 nights in strong Roma Norte boutiques (two rooms), private transfers, one private/chef-led group experience, excellent meals, day trip, Uber, tips, and shopping. Flights from Toronto estimated separately at CAD 700–1,100 RT pp (Flair or similar for lowest; confirm current). Total realistic per couple ~CAD 3,200–4,200 depending on flight timing and hotel exact rate. Book early for deals.</div>
+</section>
+<div class="image-break" style="background-image: url('images/market.jpg');"><div class="image-break-caption">Morning light at Mercado Medellín</div></div>
+<section id="itinerary" style="background: #FAF7F5;">
+  <h2 class="section-title reveal">The Itinerary</h2>
+  <p class="section-sub reveal">Four unhurried days of focused, high-flavor highlights. Private where it matters. Flexible where it doesn’t. Every moment designed to feel effortless.</p>
+  <div class="day-card reveal"><div class="day-number">01</div><h3><span class="day-icon">✈</span> Day 1 — Arrival & Roma Norte Welcome</h3><div class="day-meta">Settle • Stroll • First Flavors</div><p>Touch down and let the city welcome you softly. A private transfer whisks you to Brick Hotel in the heart of Roma Norte — a restored mansion with MICHELIN Key, speakeasy, and a rooftop that catches the late light. After checking in and acclimating to the altitude, take a golden-hour stroll through leafy streets. Dinner is at Taquería Orinoco: trompo al pastor, res, and chicharrón norteño, with toppings you control yourself. A welcome mezcal note and your Spanish allergy card are waiting.</p><p style="margin-top:1rem; font-size:0.95rem; color:#555;">Brick Hotel, Orizaba 95 • <a href="https://www.itbrickhotel.com/" target="_blank" style="color:var(--terracotta);">Book direct</a> • Alt. Casona Roma Norte</p></div>
+  <div class="day-card reveal"><div class="day-number">02</div><h3><span class="day-icon">🍽</span> Day 2 — Markets, Contramar & Chef’s Table</h3><div class="day-meta">Private Group Experience • The Culinary Heart</div><p>Begin among the colors and scents of Mercado Medellín — fresh juices, antojitos, and the quiet confidence of stalls that know their craft. Midday brings the essential long lunch at Contramar: tuna tostadas and pescado a la talla, half red adobo, half green. Then, the evening we go deep. An intimate chef’s table for four — ideally at Brick Hotel’s Cerrajería with Chef John Bertrand — tailored, allergy-briefed, and unhurried. Storytelling with each course. Mezcal in good company.</p><p style="margin-top:1rem; font-size:0.95rem; color:#555;">Contramar, Durango 200 • Chef’s Table via hotel or Chef CDMX • Rosetta / Casa Alex alternatives</p></div>
+  <div class="day-card reveal"><div class="day-number">03</div><h3><span class="day-icon">🏛</span> Day 3 — Centro Histórico & Taco Odyssey</h3><div class="day-meta">Guided • Historic • Flavor-Focused</div><p>Morning light on the Palacio de Bellas Artes, the Zócalo, and Templo Mayor — architecture and layers of history, given context so the grandeur lands. Midday is a deliberate taco crawl through Roma: suadero and campechano at Los Rogacianos, then back to Orinoco or a trusted trompo for al pastor with pineapple. Toppings controlled, protocol clear. Evening is yours — a light dinner in Condesa or a mezcal bar that takes its craft seriously.</p></div>
+  <div class="day-card reveal"><div class="day-number">04</div><h3><span class="day-icon">🏜</span> Day 4 — Day Trip: Teotihuacan</h3><div class="day-meta">Adventure Outside the City</div><p>An early private departure for the Avenue of the Dead and the Pyramid of the Sun. A bilingual guide brings the scale and story to life. A simple, peanut-free picnic or arranged meal keeps the day comfortable. Return in the afternoon for a celebratory dinner — Rosetta or Máximo Bistrot — and a final mezcal toast as the city lights come up. Shopping for last gifts fits easily between.</p><p style="margin-top:1rem; font-size:0.95rem; color:#555;">Private or semi-private via GetYourGuide with hotel pickup • Xochimilco alternative available</p></div>
+  <div class="day-card reveal"><div class="day-number">05</div><h3><span class="day-icon">✈</span> Day 5 — Departure</h3><div class="day-meta">Slow Morning • Transfer</div><p>A leisurely breakfast at the hotel or a nearby café. One last stroll through Roma’s tree-lined streets. Private transfer to the airport. You leave carrying the flavors, the light, and the ease of a trip that felt entirely yours.</p></div>
+  <div class="allergy-box reveal"><strong>Peanut Allergy Protocol (Built In):</strong> Every guide and restaurant is briefed in advance. We provide a Spanish allergy card (“Tengo una alergia grave a los cacahuates…”). Focus on tacos, grilled meats, ceviche-style, simple preparations, and places that confirm no cross-contact. Avoid all moles, pipianes, and salsa macha. Carry epinephrine. Fine dining and taquerías where assembly is visible are prioritized.</div>
+</section>
+<div class="image-break" style="background-image: url('images/mezcal.jpg');"><div class="image-break-caption">Mezcal, served properly</div></div>
+<section id="stay">
+  <h2 class="section-title reveal">Where You Stay</h2>
+  <p class="section-sub reveal">Boutique design hotels in Roma Norte — the heart of the city’s creative and culinary scene. Walkable, safe, beautiful.</p>
+  <div class="stay-hero reveal"></div>
+  <div class="grid">
+    <div class="card reveal"><div class="card-content"><h3>Brick Hotel (Top Pick)</h3><p>Orizaba 95, Roma Norte. Historic mansion (MICHELIN Key), Small Luxury Hotels of the World, Cerrajería restaurant (Chef John Bertrand), speakeasy, spa, rooftop. ~USD 320–450/night double. Perfect central base, walkable to everything. Official booking: <a href="https://www.itbrickhotel.com/" target="_blank" style="color:var(--terracotta);">itbrickhotel.com</a>. Chef’s Table available on request.</p></div></div>
+    <div class="card reveal"><div class="card-content"><h3>Casona Roma Norte</h3><p>32-room renovated 1920s building, culinary hub on site. Strong alternative, similar price range. Excellent location. Official: <a href="https://casonaroma.com/" target="_blank" style="color:var(--terracotta);">casonaroma.com</a>.</p></div></div>
+    <div class="card reveal"><div class="card-content"><h3>Condesa DF or Colima 71</h3><p>Design-forward options in Condesa/Roma border. Slightly more lifestyle vibe. Check current rates; often competitive.</p></div></div>
+  </div>
+  <div class="tip-box reveal"><strong>For two couples:</strong> Two double rooms at Brick or similar. Book direct for perks. 4 nights ~CAD 1,700–2,400 per couple for hotel. Confirm peanut-free kitchen practices if dining on-site.</div>
+</section>
+<section id="culinary">
+  <h2 class="section-title reveal">Culinary Philosophy</h2>
+  <p class="section-sub reveal">Mexico City is one of the world’s great food cities. We go deep, safely, and with local expertise.</p>
+  <div class="culinary-highlight reveal"><img src="images/tostadas.jpg" alt="Gourmet tuna tostadas with mezcal" loading="lazy"><div><ul style="font-size: 1.1rem; list-style: none;"><li style="margin-bottom: 1rem;">• Private or chef-hosted food tours over generic group tours</li><li style="margin-bottom: 1rem;">• Markets with guidance (Medellín preferred over larger ones for safety and control)</li><li style="margin-bottom: 1rem;">• Mezcal education — small-batch, respectful tasting</li><li style="margin-bottom: 1rem;">• Mix of street-level authenticity and elevated tables</li><li>• All experiences allergy-briefed in advance</li></ul></div></div>
+  <div class="allergy-box reveal"><strong>Safe Defaults:</strong> Tacos al pastor, suadero, or asada with controlled toppings. Salsa verde over roja when unsure. Ceviche and grilled fish at places that confirm no nuts. Always show the card. Many excellent restaurants in Roma (modern Mexican, Italian-Mexican, seafood) handle allergies well when notified.</div>
+</section>
+<div class="testimonial reveal"><p>“We felt looked after without ever feeling managed. The allergy protocols were seamless, the food was unforgettable, and the whole trip had the ease of something carefully designed just for us.”</p><div class="author">— Previous guests, Roma Norte, 4 nights</div></div>
+<section id="tips" style="background: #FAF7F5;">
+  <h2 class="section-title reveal">Practical Guide & Safety</h2>
+  <div class="grid">
+    <div class="reveal"><h3>Safety First</h3><p>Tourist neighborhoods (Roma, Condesa, Polanco, Centro by day) are safe with standard big-city awareness. Main risk is petty theft. Never hail street taxis. Use Uber or DiDi exclusively. Stick together as a group, especially at night. Our itinerary avoids anything remotely shady.</p></div>
+    <div class="reveal"><h3>Transport</h3><p>Uber/DiDi for all door-to-door. Private transfers for airport and day trips. Walking within Roma/Condesa is a joy. Metro is fine by day for longer hops if desired, but we prioritize comfort and ease for a luxury-leaning trip.</p></div>
+    <div class="reveal"><h3>Altitude & Practical</h3><p>Ease into Day 1. Stay hydrated. Bottled water. Best time: March–May (jacarandas) or dry season. Cash for markets/tips; cards widely accepted. Spanish phrases help but English is common in tourist/food scenes.</p></div>
+  </div>
+  <div class="tip-box reveal"><strong>Shopping & Sightseeing:</strong> Roma and Condesa for design, fashion, and local brands. Centro for classic souvenirs and architecture. Day trips add the “wow” without complexity. We keep pacing relaxed so the food and friendship remain the focus.</div>
+</section>
+<section id="deals">
+  <h2 class="section-title reveal">Deals & How to Book Smart</h2>
+  <p class="section-sub reveal">Luxury feel without the full luxury price tag. These strategies keep you near the $4,000 CAD group target.</p>
+  <div class="deals-grid">
+    <div class="deal reveal"><strong><span class="deal-icon">🏨</span> Hotels</strong><p>Book direct for 10–20% off, free breakfast, or credits. Watch for advance-purchase rates. Roma boutiques often beat Polanco five-stars on value.</p></div>
+    <div class="deal reveal"><strong><span class="deal-icon">🎭</span> Experiences</strong><p>GetYourGuide, Viator, or direct with local operators for private group rates. Chef-led food tours frequently $80–150 pp — share the cost. Ask for private if group of 4+.</p></div>
+    <div class="deal reveal"><strong><span class="deal-icon">✈</span> Flights (from Canada)</strong><p>Look for midweek or shoulder season. Direct from YYZ can be competitive. Flair Airlines for lowest-cost directs. Also check Air Canada, Aeromexico, Skyscanner, Google Flights. Flexibility helps.</p></div>
+    <div class="deal reveal"><strong><span class="deal-icon">✦</span> Extras</strong><p>Many museums free on Sundays. Mercado lunches are inexpensive and excellent. Mezcal bars have happy hours. Tips are expected but modest.</p></div>
+  </div>
+  <div class="tip-box reveal" style="margin-top: 2.5rem;"><strong>Estimated Cost Tally (per couple, CAD, approx.):</strong><br>• Flights YYZ–MEX RT: 1,400–2,200<br>• Hotel (2 rooms, 4 nights, Brick or Casona): 1,700–2,400<br>• Food, chef’s table/private experience, Teotihuacan day trip, mezcal, shopping: 700–1,000<br>• Transfers, Uber, tips, misc: 300–400<br><strong>Total per couple: ~CAD 4,100–6,000</strong> (realistic near $4,000 with early booking and smart deals). Ground-only closer to 2,700–3,800.</div>
+</section>
+<section id="inquiry">
+  <h2 class="section-title reveal">Ready to Make It Yours?</h2>
+  <p style="text-align: center; max-width: 700px; margin: 0 auto 2.5rem;" class="reveal">Share a few details and we’ll refine the plan around your exact dates, preferences, and pace. No commitment — just the start of something tailored.</p>
+  <form class="inquiry-form reveal" action="mailto:hello@grokvoyages.example" method="post" enctype="text/plain">
+    <div class="form-row"><div class="form-group"><label for="name">Your Name</label><input type="text" id="name" name="name" required></div><div class="form-group"><label for="email">Email</label><input type="email" id="email" name="email" required></div></div>
+    <div class="form-row"><div class="form-group"><label for="dates">Preferred Dates</label><input type="text" id="dates" name="dates" placeholder="e.g. Dec 28 – Jan 1"></div><div class="form-group"><label for="group">Group Size</label><select id="group" name="group"><option>2 couples (4 people)</option><option>1 couple</option><option>3 couples</option><option>Other</option></select></div></div>
+    <div class="form-group"><label for="notes">Anything else we should know?</label><textarea id="notes" name="notes" rows="4" placeholder="Day-trip preference, dietary notes, pace..."></textarea></div>
+    <button type="submit" class="form-submit">Request a Custom Refinement</button>
+  </form>
+</section>
+<footer><div class="logo">Grok Voyages</div><p>Private Culinary Journeys to Mexico City</p><p style="margin-top: 0.8rem; opacity: 0.7; font-size: 0.95rem;">Crafted with deep local insight, safety, and flavor. For friends who know the difference between a trip and an experience.</p></footer>
+<script>
+const toggle = document.querySelector('.mobile-toggle');
+const navLinks = document.querySelector('.nav-links');
+toggle.addEventListener('click', () => navLinks.classList.toggle('active'));
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => { if (window.scrollY > 50) nav.classList.add('scrolled'); else nav.classList.remove('scrolled'); });
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); } }); }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+reveals.forEach(el => observer.observe(el));
+document.querySelectorAll('a[href^="#"]').forEach(anchor => { anchor.addEventListener('click', function (e) { e.preventDefault(); const target = document.querySelector(this.getAttribute('href')); if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' }); navLinks.classList.remove('active'); }); });
+</script>
+</body>
+</html>
